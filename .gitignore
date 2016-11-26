@@ -1,5 +1,1 @@
-/nbproject
-/.idea
-/.vagrant
-/src/vendor/*
-/nbproject
+.DS_Store
