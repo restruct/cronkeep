@@ -33,11 +33,7 @@
 
 <div class="row visible-full-crontab<?php echo $crontabEmpty ? ' hidden' : '' ?>">
     <div class="col-xs-8">
-        <h2>Crontab contents for user : <?php echo $systemUser->getUsername() ?></h2>
-        <pre>
-PHP executable: <?php echo $phpPath; ?><br>
-SilverStripe CLI script: <?php echo $ssCliScriptPath; ?>
-        </pre>
+        <h2 class="text-primary">Crontab contents for user : <?php echo $systemUser->getUsername() ?></h2>
     </div>
     <div class="col-xs-4">
         <button type="button" class="btn btn-primary pull-right job-add" title="Add Job"
@@ -46,7 +42,7 @@ SilverStripe CLI script: <?php echo $ssCliScriptPath; ?>
         </button>
     </div>
 </div>
-<div class="panel panel-default panel-crontab visible-full-crontab
+<div class="panel panel-primary panel-crontab visible-full-crontab
             <?php echo $crontabEmpty ? 'hidden' : '' ?>">
     <div class="panel-heading">
         <input type="search" class="form-control job-search" autocomplete="off" placeholder="Search">
@@ -77,6 +73,24 @@ SilverStripe CLI script: <?php echo $ssCliScriptPath; ?>
             <?php endforeach; ?>
         </tbody>
     </table>
+
+</div>
+
+<div class="row">
+    <div class="col-xs-12"><br><br>
+        <div class="panel panel-warning">
+            <div class="panel-heading"> <h3 class="panel-title">SilverStripe environment</h3> </div>
+            <div class="panel-body">
+
+                <table class="table" style="margin-bottom:0;">
+                    <tr><td>PHP executable</td><td><?php echo $phpPath; ?></td></tr>
+                    <tr><td>SilverStripe CLI</td><td><?php echo $ssCliScriptPath; ?></td></tr>
+                    <tr><td>Example</td><td><pre><code><?php echo "$phpPath $ssCliScriptPath dev/build"; ?></code></pre></td></tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php echo $this->partial('partials/job-delete.phtml') ?>
