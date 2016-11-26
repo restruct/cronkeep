@@ -98,13 +98,12 @@ class Crontab implements \IteratorAggregate, \Countable
     public function run(Job $job)
     {
         $command = $job->getCommand();
-        if (At::isAvailable()) {
-            $command = sprintf('sh -c "echo "%s" | at now"', $job->getCommand());
-        }
-        
-        $process = new Process($command);
-        $process->start();
-        
+//        $command = sprintf("sh -c \"%s\" > %s 2>&1 & echo $! >> %s", $job->getCommand(), '/dev/null', '/dev/null');
+        $command_as_background = sprintf("sh -c \"%s\" > /dev/null 2>&1 &", $command);
+        $process = new Process($command_as_background);
+
+        $process->run();
+
         return $this;
     }
     
