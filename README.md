@@ -1,6 +1,13 @@
 # Manage cronjobs from SilverStripe
 This module wraps CronKeep into the Silverstripe framework. It contains an adapted & patched version of the excellent CronKeep tool, making cron-job management available to admins via the SilverWtripe dev-tasks.
 
+## Installation
+```
+composer require restruct/silverstripe-cronkeep:@stable
+```
+
+CronKeep can then be openend (after a ?flush=1) as /dev/tasks/
+
 ## SilverStripe CronKeep module - Cronjob management via web interface
 
 CronKeep is a web-based crontab management tool which enables teams to have visibility over what cron jobs are scheduled, run jobs on demand, add new cron jobs in a human-friendly way, or pause a cron schedule from going off, without the need for sysadmin-level access.
@@ -20,28 +27,9 @@ CronKeep is a web-based crontab management tool which enables teams to have visi
 See the app in action at [demo.cronkeep.com](http://demo.cronkeep.com).
 Running cron jobs is disabled in the demo app. 
 
-## Requirements
-
-CronKeep fits nicely into your LAMP stack. Apache and PHP 5.3.23 or newer are required.
+## Note
 
 The current CronKeep version interacts only with the crontab of the user Apache is running as. This means it will only have access to the jobs added for user `www-data`, `apache` or `nobody`, depending on your system.
-
-## Installation
-
-* Proceed with installing Composer if you don't already have it.
-
-```Shell
-curl -sS https://getcomposer.org/installer | php
-```
-
-* Now using this one-liner command, Composer will install CronKeep and all of its dependencies onto your directory of choice (preferably, your *www* directory):
-```Shell
-php composer.phar create-project cronkeep/cronkeep --keep-vcs -s dev /var/www/cronkeep
-```
-
-* Set up authentication
-
-At this time, the crontab manager does not feature in-app authentication. It is up to the user to set up means of authentication. Please refer to [Installation](INSTALL.md#set-up-a-virtual-host) for more details.
 
 ## License
 
