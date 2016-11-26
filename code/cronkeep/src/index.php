@@ -15,13 +15,35 @@
  * limitations under the License.
  */
 
-require_once 'vendor/autoload.php';
+//require_once 'vendor/autoload.php';
+//require_once '../../../../vendor/autoload.php';
+
+//
+// some SS bootstrapping & use Silverstripe to authenticate
+//
+require_once '../../../../framework/core/Constants.php';
+require_once '../../../../framework/core/Core.php';
+// setup DB to check if user is logged in
+require_once '../../../../framework/model/DB.php';
+global $databaseConfig;
+if ($databaseConfig) DB::connect($databaseConfig);
+// start session
+if(!isset($_SESSION) && Session::request_contains_session_id()) {
+    Session::start();
+}
+// check ADMIN privileges
+if(!Permission::check('ADMIN')) die('Require ADMIN');
+//
+// ALL OK: continue with CronKeep code
+//
+
 use \models\Crontab;
 use \models\Crontab\Exception;
 use \models\SystemUser;
 use \models\At;
 use \forms\AddJob;
 use \services\ExpressionService;
+
 
 $app = new \Slim\Slim([
     'templates.path' => 'application/views',
@@ -48,6 +70,10 @@ $app->get('/', function() use ($app) {
     $simpleForm   = new AddJob\SimpleForm();
     $advancedForm = new AddJob\AdvancedForm();
 
+    // Some SilverStripe environment vars
+    // /usr/bin/php /path/to/silverstripe/docroot/framework/cli-script.php dev/cron
+    $php_path     = exec('which php');
+
     $showAlertAtUnavailable = $app->getCookie('showAlertAtUnavailable');
     $app->view->setData('showAlertAtUnavailable', $showAlertAtUnavailable !== null ?
         (bool) $showAlertAtUnavailable : true);
@@ -55,10 +81,12 @@ $app->get('/', function() use ($app) {
     $app->render('index.phtml', [
         'crontab'              => $crontab,
         'systemUser'           => $systemUser,
-        'isAtCommandAvailable' => At::isAvailable(),
-        'atCommandErrorOutput' => At::getErrorOutput(),
+
         'simpleForm'           => $simpleForm,
-        'advancedForm'         => $advancedForm
+        'advancedForm'         => $advancedForm,
+
+        'phpPath'              => $php_path,
+        'ssCliScriptPath'      => FRAMEWORK_PATH . '/cli-script.php',
     ]);
 });
 
