@@ -1,10 +1,10 @@
 {
     "name": "restruct/silverstripe-cronkeep",
-    "description": "SilverStripe CronKeep integration - Cronjob management via web interface",
-    "keywords": ["silverstripe", "crontab", "cron"],
     "type": "silverstripe-module",
-    "homepage": "http://www.cronkeep.com",
+    "description": "SilverStripe CronKeep integration - Cronjob management via web interface",
     "license": "Apache-2.0",
+    "keywords": ["silverstripe", "crontab", "cron"],
+    "homepage": "http://www.cronkeep.com",
     "authors": [
         {
             "name": "Bogdan Ghervan",
