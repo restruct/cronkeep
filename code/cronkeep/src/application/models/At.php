@@ -33,7 +33,7 @@ class At
      * Possible errors printed by "at".
      */
     const ERROR_ACCESS_DENIED = 'You do not have permission to use at.';
-    const ERROR_GARBLED_TIME  = 'Garbled time';
+//    const ERROR_GARBLED_TIME  = 'Garbled time';
     
     /**
      * Command is available and can be used.
@@ -64,14 +64,12 @@ class At
     public static function isAvailable()
     {
         if (self::$_isAvailable === null) {
-            $process = new Process('at');
+            $process = new Process('which at');
             $process->run();
             
             self::$_errorOutput = trim($process->getErrorOutput());
             
-            // Receiving "Garbled time" is a good sign - it means the command
-            // is available (even though the input was not right)
-            self::$_isAvailable = trim(self::$_errorOutput) == self::ERROR_GARBLED_TIME;
+            self::$_isAvailable = ($process->getOutput() !== NULL);
         }
         
         return self::$_isAvailable;
