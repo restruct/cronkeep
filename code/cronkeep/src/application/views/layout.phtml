@@ -33,22 +33,14 @@
 </head>
 <body>
     <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href=".">CronKeep</a>
-            </div>
+            <a class="btn btn-default navbar-btn" href="#" onclick="window.top.location.href = '../../../../dev/tasks/';">. . /&nbsp;&nbsp;(back to SilverStripe tasks)</a>
+            <a class="navbar-brand navbar-right" href=".">CronKeep</a>
         </div>
     </div>
 
     <div class="container">
-        <?php if (isset($showAlertAtUnavailable) && $showAlertAtUnavailable && !$isAtCommandAvailable): ?>
-            <?php echo $this->partial('partials/alerts/at-unavailable.phtml', array(
-                'atCommandErrorOutput' => $atCommandErrorOutput,
-                'systemUser' => $systemUser
-            )) ?>
-        <?php endif; ?>
-
         <div class="global-alerts"></div>
         <div><?php echo $content ?></div>
     </div>
