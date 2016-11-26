@@ -30,6 +30,9 @@
         "zendframework/zend-i18n": "~2.3.1",
         "zendframework/zend-escaper": "~2.3.8"
     },
+    "suggest": {
+        "silverstripe/silverstripe-crontask": "Define crontabs to be run by the SilverStripe framework"
+    },
     "extra": {
         "installer-name": "cronkeep"
     }
