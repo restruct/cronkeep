@@ -33,7 +33,11 @@
 
 <div class="row visible-full-crontab<?php echo $crontabEmpty ? ' hidden' : '' ?>">
     <div class="col-xs-8">
-        <h2><?php echo $systemUser->getUsername() ?></h2>
+        <h2>Crontab contents for user : <?php echo $systemUser->getUsername() ?></h2>
+        <pre>
+PHP executable: <?php echo $phpPath; ?>
+SilverStripe CLI script: <?php echo $ssCliScriptPath; ?>
+        </pre>
     </div>
     <div class="col-xs-4">
         <button type="button" class="btn btn-primary pull-right job-add" title="Add Job"
