@@ -15,9 +15,6 @@
  * limitations under the License.
  */
 
-//require_once 'vendor/autoload.php';
-//require_once '../../../../vendor/autoload.php';
-
 //
 // some SS bootstrapping & use Silverstripe to authenticate
 //
