@@ -1,0 +1,16 @@
+Other interesting PHP Cron classes
+http://www.kavoir.com/2011/10/php-crontab-class-to-add-and-remove-cron-jobs.html
+https://packagist.org/packages/yzalis/crontab
+https://github.com/silverstripe/silverstripe-crontask
+
+Changes to cronkeep:
+1. Changed path to vendor/autoloader in index.php --> removed since we're relying on SS autoloader instead
+2. Made ajax paths in js relative ( find-n-replace "'/job" > "'job" in *.js
+3. Changed navbar to contain link back to 'dev/tasks': add navlink to layout.phtml (<a class="btn btn-default navbar-btn" href="#" onclick="window.top.location.href = '../../../../dev/tasks/';">. . /&nbsp;&nbsp;(back to SilverStripe tasks)</a>)
+4. Remove deploy.php script and provisioning dir
+5. Bootstrap index with Silverstripe environment & check for ADMIN privileges or die()
+6. Added some Silverstripe Environment info to index
+7. Fix the 'run' command in Crontab.php to not use 'at', but just run as background instantly: $command_as_background = sprintf("sh -c \"%s\" > /dev/null 2>&1 &", $command);
+8-old. Fix At.php command: 'at' -> 'which at' & self::$_isAvailable = ($process->getOutput() !== NULL)
+8-instead. Remove altogether the whole At.php, AtNotavailable.phtml & references to it in index.php & layout.phtml
+9. Remove Roboto from styles.css as it has spacing issues making it unsuitable for reading programmatic code, changed cron fields to use monospace fonts
