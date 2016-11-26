@@ -19,7 +19,7 @@ class Cronjob_Manager extends BuildTask
         print "<style>*{ font-family: Arial,sans-serif; font-weight: normal; }</style>";
 
 //        print '<iframe style="height:100vh;width:100vw;position:absolute;top:0;left:0;right:0;bottom:0;" src="' . BASE_URL . '/vendor/cronkeep/cronkeep/src/" />';
-        print '<iframe style="height:100vh;width:100vw;position:absolute;top:0;left:0;right:0;bottom:0;border:0;" src="' . BASE_URL . '/cronmanager/code/cronkeep/src/" />';
+        print '<iframe style="height:100vh;width:100vw;position:absolute;top:0;left:0;right:0;bottom:0;border:0;" src="' . BASE_URL . '/cronkeep/code/cronkeep/src/" />';
 
         print 'LOADING...';
     }
