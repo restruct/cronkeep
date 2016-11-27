@@ -76,22 +76,12 @@
 
 </div>
 
-<div class="row">
-    <div class="col-xs-12"><br><br>
-        <div class="panel panel-warning">
-            <div class="panel-heading"> <h3 class="panel-title">SilverStripe environment</h3> </div>
-            <div class="panel-body">
-
-                <table class="table" style="margin-bottom:0;">
-                    <tr><td>PHP executable</td><td><?php echo $phpPath; ?></td></tr>
-                    <tr><td>SilverStripe CLI</td><td><?php echo $ssCliScriptPath; ?></td></tr>
-                    <tr><td>Example</td><td><pre><code><?php echo "$phpPath $ssCliScriptPath dev/build"; ?></code></pre></td></tr>
-                </table>
-
-            </div>
-        </div>
-    </div>
-</div>
+<?php global $_FILE_TO_URL_MAPPING;
+echo $this->partial('partials/ssenv-info.phtml', array(
+    '_FILE_TO_URL_MAPPING' => $_FILE_TO_URL_MAPPING,
+    'phpPath' => $phpPath,
+    'ssCliScriptPath' => $ssCliScriptPath,
+)) ?>
 
 <?php echo $this->partial('partials/job-delete.phtml') ?>
 <?php echo $this->partial('partials/job-add-dialog.phtml', array(

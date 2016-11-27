@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-xs-12"><br><br>
+        <div class="panel panel-info">
+            <div class="panel-heading"> <h3 class="panel-title">SilverStripe environment</h3> </div>
+            <div class="panel-body">
+
+                <table class="table" style="margin-bottom:0;">
+                    <tr><td>PATH ↔ URL map</td><td>
+                            <?php
+                            global $_FILE_TO_URL_MAPPING;
+                            if ( ! $_FILE_TO_URL_MAPPING) {
+                                ?>
+                                <p class="alert alert-warning" role="alert" style="margin-bottom: 0;">
+                                    <strong>$_FILE_TO_URL_MAPPING not defined in _ss_environment.php</strong>
+                                    (see <a href="https://docs.silverstripe.org/en/3.4/developer_guides/cli/#configuration" target="_blank">the docs</a>).
+                                    <br>
+                                    SilverStripe sometimes needs to know the URL of your site when executing CLI scripts, eg (add to _ss_environment.php): <br>
+                                    <code>$_FILE_TO_URL_MAPPING['<?php echo BASE_PATH; ?>'] = '<?php echo Director::protocolAndHost() . BASE_URL; ?>';</code>
+                                </p>
+                            <?php } else { echo "<code>";
+                                foreach($_FILE_TO_URL_MAPPING as $path => $url) {
+                                    echo "$path -> $url";
+                                };
+                                echo "</code>";
+                            } ?>
+                        </td></tr>
+                    <tr><td>PHP executable</td><td><code><?php echo $phpPath; ?></code></td></tr>
+                    <tr><td>SilverStripe CLI</td><td><code><?php echo $ssCliScriptPath; ?></code></td></tr>
+                    <tr><td>Example crontask</td><td><code><?php echo "$phpPath $ssCliScriptPath dev/build"; ?></code></td></tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

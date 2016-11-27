@@ -84,6 +84,7 @@ $app->get('/', function() use ($app) {
 
         'phpPath'              => $php_path,
         'ssCliScriptPath'      => FRAMEWORK_PATH . '/cli-script.php',
+        'ssEnvHostSetup'       => Director::protocolAndHost(),
     ]);
 });
 
