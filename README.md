@@ -6,7 +6,7 @@ This module wraps CronKeep into the Silverstripe framework. It contains an adapt
 composer require restruct/silverstripe-cronkeep:@stable
 ```
 
-CronKeep can then be openend (after a ?flush=1) as /dev/tasks/
+CronKeep can then be openend (after flushing the cache (?flush=1)) at /dev/tasks/Cronjob_Manager
 
 ## SilverStripe CronKeep module - Cronjob management via web interface
 
