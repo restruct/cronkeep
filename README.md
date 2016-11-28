@@ -1,5 +1,5 @@
 # Manage cronjobs from SilverStripe
-This module wraps CronKeep into the Silverstripe framework. It contains an adapted & patched version of the excellent CronKeep tool, making cron-job management available to admins via the SilverWtripe dev-tasks.
+This module wraps CronKeep into the Silverstripe framework. It contains an adapted & patched version of the excellent [CronKeep tool](https://github.com/cronkeep/cronkeep), making cron-job management available to admins via the SilverWtripe dev-tasks.
 
 ## Installation
 ```
