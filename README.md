@@ -12,7 +12,9 @@ CronKeep can then be openend (after a ?flush=1) as /dev/tasks/
 
 CronKeep is a web-based crontab management tool which enables teams to have visibility over what cron jobs are scheduled, run jobs on demand, add new cron jobs in a human-friendly way, or pause a cron schedule from going off, without the need for sysadmin-level access.
 
-![CronKeep — Add Job screen](code/cronkeep/docs/screenshots/add-job-screen.png "CronKeep — Add Job screen")
+![CronKeep — List Jobs screen](code/cronkeep/docs/screenshots/list-screen.png)
+
+![CronKeep — Add Job screen](code/cronkeep/docs/screenshots/add-job-screen.png)
 
 ## Features
 
