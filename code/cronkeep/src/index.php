@@ -69,7 +69,31 @@ $app->get('/', function() use ($app) {
 
     // Some SilverStripe environment vars
     // /usr/bin/php /path/to/silverstripe/docroot/framework/cli-script.php dev/cron
-    $php_path     = exec('which php');
+    // For some reason returns /usr/bin/php instead of actual php (/usr/local/bin/php), probably correct $SHELL isn't loaded by php
+    $php_path     = exec('which php'); // system PHP, not necessarily the current Apache version, try & find that
+    $php_path_version = $php_path;
+    if(strpos($php_path, 'bin')>0){
+        exec('php -v', $vinfo);
+        $php_path_version .= ' [version: ' . array_shift($vinfo) . ']';
+    }
+    $php_path_info = "System PHP: $php_path_version\n";
+
+    // Too precise, e.g.: /usr/local/Cellar/php56/5.6.27_4/bin (may be different version than CLI linked version
+    if(defined('PHP_BINDIR') && PHP_BINDIR) {
+        $php_path_webserver = PHP_BINDIR . DIRECTORY_SEPARATOR . 'php';
+        $php_path_info .= "\nWebserver PHP: $php_path_webserver \n(if this contains version numbers they may change at updates, may not be suitable for use in cronjob)\n";
+    }
+
+    // May cause trouble with open_basedir...
+    // Not always defined (not defined in my dev environment, neither in live)
+//    if(defined('PHP_BINARY') && PHP_BINARY) die(PHP_BINARY); $php_full_path = PHP_BINARY;
+    // Try & add extra info
+    $usr_local_bin = '/usr/local/bin/php';
+    // @is_readable to prevent warning in case out of open_basedir
+    if(@is_readable($usr_local_bin) && file_exists($usr_local_bin) && $usr_local_bin_target = readlink($usr_local_bin)){
+        $php_path_info .= "\nAlias: '$usr_local_bin' may be good to use, links to: $usr_local_bin$usr_local_bin_target\n";
+        $php_path = $usr_local_bin; // reset if exists
+    }
 
     $showAlertAtUnavailable = $app->getCookie('showAlertAtUnavailable');
     $app->view->setData('showAlertAtUnavailable', $showAlertAtUnavailable !== null ?
@@ -81,8 +105,9 @@ $app->get('/', function() use ($app) {
 
         'simpleForm'           => $simpleForm,
         'advancedForm'         => $advancedForm,
-
+        // For SS/PHP environment info (used via ssenv-info.phtml partial)
         'phpPath'              => $php_path,
+        'phpPathInfo'          => $php_path_info,
         'ssCliScriptPath'      => FRAMEWORK_PATH . '/cli-script.php',
         'ssEnvHostSetup'       => Director::protocolAndHost(),
     ]);
@@ -215,7 +240,7 @@ $app->group('/job', function() use ($app) {
 
             $app->render(200, [
                 'error' => false,
-                'msg' => 'Process started.'
+                'msg' => 'Process started: '
             ]);
         } else {
             $app->render(404, [

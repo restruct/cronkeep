@@ -98,8 +98,12 @@ class Crontab implements \IteratorAggregate, \Countable
     public function run(Job $job)
     {
         $command = $job->getCommand();
+        // remove comment if job is commented out/inactive in cron
+//        if(substr($command, 0, 1)=="#") $command = substr($command,1);
 //        $command = sprintf("sh -c \"%s\" > %s 2>&1 & echo $! >> %s", $job->getCommand(), '/dev/null', '/dev/null');
-        $command_as_background = sprintf("sh -c \"%s\" > /dev/null 2>&1 &", $command);
+        $command_in_shell = sprintf("sh -c \"%s\"", str_replace("\"", "\\\"", $command));
+        $command_as_background = sprintf("%s > /dev/null 2>&1 &", $command_in_shell);
+
         $process = new Process($command_as_background);
 
         $process->run();
