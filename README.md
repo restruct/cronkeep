@@ -1,20 +1,18 @@
 # Manage cronjobs from SilverStripe
-This module wraps CronKeep into the Silverstripe framework. It contains an adapted & patched version of the excellent [CronKeep tool](https://github.com/cronkeep/cronkeep), making cron-job management available to admins via the SilverStripe dev-tasks.
+This module wraps CronKeep into the Silverstripe framework. It contains an adapted & patched version of the excellent CronKeep tool, making cron-job management available to admins via the SilverStripe dev-tasks.
 
 ## Installation
 ```
 composer require restruct/silverstripe-cronkeep:@stable
 ```
 
-CronKeep can then be openend (after flushing the cache (?flush=1)) at /dev/tasks/Cronjob_Manager
+CronKeep can then be openend (after a ?flush=1) as /dev/tasks/
 
 ## SilverStripe CronKeep module - Cronjob management via web interface
 
 CronKeep is a web-based crontab management tool which enables teams to have visibility over what cron jobs are scheduled, run jobs on demand, add new cron jobs in a human-friendly way, or pause a cron schedule from going off, without the need for sysadmin-level access.
 
-![CronKeep — List Jobs screen](code/cronkeep/docs/screenshots/list-screen.png)
-
-![CronKeep — Add Job screen](code/cronkeep/docs/screenshots/add-job-screen.png)
+![CronKeep — Add Job screen](code/cronkeep/docs/screenshots/add-job-screen.png "CronKeep — Add Job screen")
 
 ## Features
 
